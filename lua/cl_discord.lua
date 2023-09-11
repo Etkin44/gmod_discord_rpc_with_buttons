@@ -9,6 +9,8 @@ local map_list = {
     gm_flatgrass = true,
     gm_construct = true
 }
+local joinbtn_url = "https://wiki.facepunch.com/gmod"
+local joinbtn_label = "Go to Wiki"
 local image_fallback = "default"
 local discord_id = "626155559779041331"
 local refresh_time = 60
@@ -36,6 +38,9 @@ function DiscordUpdate()
     -- Determine the max number of players
     rpc_data["partySize"] = player.GetCount()
     rpc_data["partyMax"] = game.MaxPlayers()
+
+    rpc_data["label"] = joinbtn_label
+    rpc_data["url"] = joinbtn_url
     if game.SinglePlayer() then rpc_data["partyMax"] = 0 end
 
     -- Handle map stuff

@@ -175,8 +175,8 @@ LUA_FUNCTION(UpdateDiscordStatus) {
     LUA->GetField(1, "instance");
     discordP.instance = LUA->GetNumber();
     DiscordRichPresenceButton discordButton;
-    discordButton.label = "Oyuna Katil";
-    discordButton.url = "https://connect.kediyuvasi.com.tr/";
+    discordButton.label = "Etkin Baba en iyi"; // EDIT
+    discordButton.url = "https://steamcommunity.com/id/Hermes000/"; // EDIT
     discordP.buttons[0] = &discordButton;
 
     Discord_UpdatePresence(&discordP);

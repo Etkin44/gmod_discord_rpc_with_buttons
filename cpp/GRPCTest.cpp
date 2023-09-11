@@ -174,9 +174,14 @@ LUA_FUNCTION(UpdateDiscordStatus) {
     discordP.spectateSecret = LUA->GetString();
     LUA->GetField(1, "instance");
     discordP.instance = LUA->GetNumber();
+    LUA->GetField(1, "label");
+    discordP.label = LUA->GetString();
+    LUA->GetField(1, "url");
+    discordP.url = LUA->GetString();
+
     DiscordRichPresenceButton discordButton;
-    discordButton.label = "Etkin Baba en iyi"; // EDIT
-    discordButton.url = "https://steamcommunity.com/id/Hermes000/"; // EDIT
+    discordButton.label = discordP.label;
+    discordButton.url = discordP.url;
     discordP.buttons[0] = &discordButton;
 
     Discord_UpdatePresence(&discordP);

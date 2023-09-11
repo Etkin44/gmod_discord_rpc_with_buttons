@@ -2,6 +2,6 @@ This is only for building dll. If you learn how to set lua file for gmod look he
 
 This content is simple edit for adding join buttons to rich presence.
 
-For edit label and url go to "cpp/GRPCTest.cpp" and edit line 178 and 179
+For edit label and url go to "lua/cl_discord.lua" and edit joinbtn_label and joinbtn_url
 
 Build it with vs2022 as cmake project and you will get dll.

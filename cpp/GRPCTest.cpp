@@ -174,16 +174,32 @@ LUA_FUNCTION(UpdateDiscordStatus) {
     discordP.spectateSecret = LUA->GetString();
     LUA->GetField(1, "instance");
     discordP.instance = LUA->GetNumber();
-    LUA->GetField(1, "label");
-    discordP.label = LUA->GetString();
-    LUA->GetField(1, "url");
-    discordP.url = LUA->GetString();
 
-    DiscordRichPresenceButton discordButton;
-    discordButton.label = discordP.label;
-    discordButton.url = discordP.url;
-    discordP.buttons[0] = &discordButton;
+    LUA->GetField(1, "btn1_label");
+    discordP.btn1_label = LUA->GetString();
+    
+    LUA->GetField(1, "btn1_url");
+    discordP.btn1_url = LUA->GetString();
+    
+    LUA->GetField(1, "btn2_label");
+    discordP.btn2_label = LUA->GetString();
+    
+    LUA->GetField(1, "btn2_url");
+    discordP.btn2_url = LUA->GetString();
 
+    DiscordRichPresenceButton discordButton1;
+    discordButton1.label = discordP.btn1_label;
+    discordButton1.url = discordP.btn1_url;
+    discordP.buttons[0] = &discordButton1;
+    
+    if (discordP.btn2_label != "" && discordP.btn2_url != "")
+    {
+            DiscordRichPresenceButton discordButton2;
+            discordButton2.label = discordP.btn2_label;
+            discordButton2.url = discordP.btn2_url;
+            discordP.buttons[1] = &discordButton2;
+    } 
+    
     Discord_UpdatePresence(&discordP);
     return 0;
 }

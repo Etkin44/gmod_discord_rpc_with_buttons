@@ -9,11 +9,6 @@ local map_list = {
     gm_flatgrass = true,
     gm_construct = true
 }
-local joinbtn1_url = "https://wiki.facepunch.com/gmod"
-local joinbtn1_label = "Go to Wiki"
-
-local joinbtn2_url = "https://wiki.facepunch.com/gmod"
-local joinbtn2_label = "Go to Wiki2"
 
 local buttons = {
     btn1 = {

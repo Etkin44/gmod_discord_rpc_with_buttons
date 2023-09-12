@@ -62,6 +62,11 @@ function DiscordUpdate()
     elseif IsValid(buttons.btn2) and not buttons.btn2.text == "" and not buttons.btn2.url
         rpc_data["btn2_label"] = buttons.btn2.text
         rpc_data["btn2_url"] = buttons.btn2.url
+    else
+        rpc_data["btn1_label"] = ""
+        rpc_data["btn1_url"] = ""
+        rpc_data["btn2_label"] = ""
+        rpc_data["btn2_url"] = ""
     end
 
     if game.SinglePlayer() then rpc_data["partyMax"] = 0 end

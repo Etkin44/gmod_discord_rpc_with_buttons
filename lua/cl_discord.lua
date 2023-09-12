@@ -22,6 +22,7 @@ local buttons = {
 }
 
 --If you want to add only 1 button to your rpc just delete lines betweens 23-26
+--If you want not to add button just make buttons table like this local buttons = {}
 
 local image_fallback = "default"
 local discord_id = "626155559779041331"
@@ -51,10 +52,10 @@ function DiscordUpdate()
     rpc_data["partySize"] = player.GetCount()
     rpc_data["partyMax"] = game.MaxPlayers()
 
-    if IsValid(buttons.btn1) and not buttons.btn1.text == "" and not buttons.btn1.url then
+    if IsValid(buttons.btn1) and not buttons.btn1.text == "" and not buttons.btn1.url == "" then
         rpc_data["btn1_label"] = buttons.btn1.text
         rpc_data["btn1_url"] = buttons.btn1.url
-    elseif IsValid(buttons.btn2) and not buttons.btn2.text == "" and not buttons.btn2.url
+    elseif IsValid(buttons.btn2) and not buttons.btn2.text == "" and not buttons.btn2.url == "" then
         rpc_data["btn2_label"] = buttons.btn2.text
         rpc_data["btn2_url"] = buttons.btn2.url
     else

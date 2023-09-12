@@ -9,8 +9,25 @@ local map_list = {
     gm_flatgrass = true,
     gm_construct = true
 }
-local joinbtn_url = "https://wiki.facepunch.com/gmod"
-local joinbtn_label = "Go to Wiki"
+local joinbtn1_url = "https://wiki.facepunch.com/gmod"
+local joinbtn1_label = "Go to Wiki"
+
+local joinbtn2_url = "https://wiki.facepunch.com/gmod"
+local joinbtn2_label = "Go to Wiki2"
+
+local buttons = {
+    btn1 = {
+        text = "This is first button",
+        url = "https://github.com/Etkin44/gmod_discord_rpc_with_buttons/"
+    },
+    btn2 = {
+        text = "This is second button",
+        url = "https://github.com/Etkin44/gmod_discord_rpc_with_buttons/"
+    }
+}
+
+--If you want to add only 1 button to your rpc just delete lines betweens 23-26
+
 local image_fallback = "default"
 local discord_id = "626155559779041331"
 local refresh_time = 60
@@ -39,8 +56,14 @@ function DiscordUpdate()
     rpc_data["partySize"] = player.GetCount()
     rpc_data["partyMax"] = game.MaxPlayers()
 
-    rpc_data["label"] = joinbtn_label
-    rpc_data["url"] = joinbtn_url
+    if IsValid(buttons.btn1) and not buttons.btn1.text == "" and not buttons.btn1.url then
+        rpc_data["btn1_label"] = buttons.btn1.text
+        rpc_data["btn1_url"] = buttons.btn1.url
+    elseif IsValid(buttons.btn2) and not buttons.btn2.text == "" and not buttons.btn2.url
+        rpc_data["btn2_label"] = buttons.btn2.text
+        rpc_data["btn2_url"] = buttons.btn2.url
+    end
+
     if game.SinglePlayer() then rpc_data["partyMax"] = 0 end
 
     -- Handle map stuff

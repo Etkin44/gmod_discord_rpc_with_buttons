@@ -43,7 +43,8 @@ function DiscordUpdate()
         end
     end
 
-
+    rpc_data["partySize"] = player.GetCount()
+    rpc_data["partyMax"] = game.MaxPlayers()
     if game.SinglePlayer() then rpc_data["partyMax"] = 0 end
 
     -- Handle map stuff

@@ -176,32 +176,33 @@ LUA_FUNCTION(UpdateDiscordStatus) {
     discordP.instance = LUA->GetNumber();
 
     LUA->GetField(1, "btn1_label");
-    discordP.btn1_label = LUA->GetString();
-    
-    LUA->GetField(1, "btn1_url");
-    discordP.btn1_url = LUA->GetString();
-    
-    LUA->GetField(1, "btn2_label");
-    discordP.btn2_label = LUA->GetString();
-    
-    LUA->GetField(1, "btn2_url");
-    discordP.btn2_url = LUA->GetString();
+        if (LUA->GetType(-1) == GarrysMod::Lua::Type::String) {
+            DiscordRichPresenceButton button;
 
-    if (discordP.btn1_label != "" && discordP.btn1_url != "")
-    {
-            DiscordRichPresenceButton discordButton1;
-            discordButton1.label = discordP.btn1_label;
-            discordButton1.url = discordP.btn1_url;
-            discordP.buttons[0] = &discordButton1;
-    };
-    
-    if (discordP.btn2_label != "" && discordP.btn2_url != "")
-    {
-            DiscordRichPresenceButton discordButton2;
-            discordButton2.label = discordP.btn2_label;
-            discordButton2.url = discordP.btn2_url;
-            discordP.buttons[1] = &discordButton2;
-    };
+            button.label = LUA->GetString();
+
+            LUA->GetField(1, "btn1_url");
+            LUA->CheckString();
+
+            button.url = LUA->GetString();
+
+            discordP.buttons[0] = &button;
+        }
+
+        LUA->GetField(1, "btn2_label");
+        if (LUA->GetType(-1) == GarrysMod::Lua::Type::String) {
+            DiscordRichPresenceButton button;
+
+            button.label = LUA->GetString();
+
+            LUA->GetField(1, "btn2_url");
+            LUA->CheckString();
+
+            button.url = LUA->GetString();
+
+    #pragma warning(disable : 6201)
+            discordP.buttons[1] = &button;
+        }
     
     Discord_UpdatePresence(&discordP);
     return 0;

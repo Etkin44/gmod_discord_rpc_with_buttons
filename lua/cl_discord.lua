@@ -10,17 +10,6 @@ local map_list = {
     gm_construct = true
 }
 
-local buttons = {
-    btn1 = {
-        text = "This is first button",
-        url = "https://github.com/Etkin44/gmod_discord_rpc_with_buttons/"
-    },
-    btn2 = {
-        text = "This is second button",
-        url = "https://github.com/Etkin44/gmod_discord_rpc_with_buttons/"
-    }
-}
-
 --If you want to add only 1 button to your rpc just delete lines betweens 23-26
 --If you want not to add button just make buttons table like this local buttons = {}
 
@@ -45,25 +34,15 @@ function DiscordUpdate()
             end
         else
             rpc_data["state"] = string.Replace(ip, ":27015", "")
+
+            rpc_data["btn1_label"] = "Join Server"
+            rpc_data["btn1_url"] = "steam://connect/" .. ip
+
+            rpc_data["btn2_label"] = "Join Server 2"
+            rpc_data["btn2_url"] = "steam://connect/" .. ip
         end
     end
 
-    -- Determine the max number of players
-    rpc_data["partySize"] = player.GetCount()
-    rpc_data["partyMax"] = game.MaxPlayers()
-
-    if IsValid(buttons.btn1) and not buttons.btn1.text == "" and not buttons.btn1.url == "" then
-        rpc_data["btn1_label"] = buttons.btn1.text
-        rpc_data["btn1_url"] = buttons.btn1.url
-    elseif IsValid(buttons.btn2) and not buttons.btn2.text == "" and not buttons.btn2.url == "" then
-        rpc_data["btn2_label"] = buttons.btn2.text
-        rpc_data["btn2_url"] = buttons.btn2.url
-    else
-        rpc_data["btn1_label"] = ""
-        rpc_data["btn1_url"] = ""
-        rpc_data["btn2_label"] = ""
-        rpc_data["btn2_url"] = ""
-    end
 
     if game.SinglePlayer() then rpc_data["partyMax"] = 0 end
 

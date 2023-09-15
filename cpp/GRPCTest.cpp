@@ -3,7 +3,9 @@
 #include "discord_rpc.h"
 #include <stdio.h>
 #include <string.h>
+#include <string>
 #include <utility>
+#include <typeinfo>
 
 DiscordUser cbConUser;
 std::pair<int, char> cbDisconnected;
@@ -141,6 +143,8 @@ LUA_FUNCTION(DiscordRespond) {
 
 LUA_FUNCTION(UpdateDiscordStatus) {
     DiscordRichPresence discordP;
+    DiscordRichPresenceButton button1;
+    DiscordRichPresenceButton button2;
     memset(&discordP, 0, sizeof(discordP));
     LUA->GetField(1, "state");
     discordP.state = LUA->GetString();
@@ -176,34 +180,34 @@ LUA_FUNCTION(UpdateDiscordStatus) {
     discordP.instance = LUA->GetNumber();
 
     LUA->GetField(1, "btn1_label");
-        if (LUA->GetType(-1) == GarrysMod::Lua::Type::String) {
-            DiscordRichPresenceButton button;
+    if (LUA->GetString() != NULL)
+    {
+        button1.label = LUA->GetString();
 
-            button.label = LUA->GetString();
+        LUA->GetField(1, "btn1_url");
+        LUA->CheckString();
+        button1.url = LUA->GetString();
 
-            LUA->GetField(1, "btn1_url");
-            LUA->CheckString();
+        discordP.buttons[0] = &button1;
+    }
+    else
+    {
+        discordP.state = "Bi þeyler yarra yiyo burda";
+    }
+        
+    LUA->GetField(1, "btn2_label");
+    if (LUA->GetString() != NULL)
+    {
+        button2.label = LUA->GetString();
 
-            button.url = LUA->GetString();
+        LUA->GetField(1, "btn2_url");
+        LUA->CheckString();
+        button2.url = LUA->GetString();
 
-            discordP.buttons[0] = &button;
-        }
-
-        LUA->GetField(1, "btn2_label");
-        if (LUA->GetType(-1) == GarrysMod::Lua::Type::String) {
-            DiscordRichPresenceButton button;
-
-            button.label = LUA->GetString();
-
-            LUA->GetField(1, "btn2_url");
-            LUA->CheckString();
-
-            button.url = LUA->GetString();
-
-    #pragma warning(disable : 6201)
-            discordP.buttons[1] = &button;
-        }
-    
+        #pragma warning(disable : 6201)
+        discordP.buttons[1] = &button2;     
+    }
+  
     Discord_UpdatePresence(&discordP);
     return 0;
 }

@@ -1,5 +1,5 @@
 This content is simple edit for adding join buttons to rich presence.
 
-For edit label and url go to "lua/cl_discord.lua" and edit joinbtn_label and joinbtn_url
+For edit label and url go to "lua/cl_discord.lua" and edit label and url
 
 Source Code and builded dlls added
